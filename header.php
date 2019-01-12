@@ -78,5 +78,14 @@ $container = get_theme_mod( 'understrap_container_type' );
 			<?php endif; ?>
 
 		</nav><!-- .site-navigation -->
+		<?php if ( class_exists( 'woocommerce' ) ) {
+						//https://www.skyverge.com/blog/get-woocommerce-page-urls/
+						echo '<a style="font-size:1.7em;" class="btn btn-secondary btn-lg" 
+							href="'.esc_url(wc_get_cart_url()).'" >
+							Go to your Cart<i class="fa fa-shopping-cart"></i></a>
+							<a style="font-size:1.7em;" class="btn btn-secondary btn-lg" 
+							href="'.esc_url(get_permalink(wc_get_page_id( 'shop' ) )).'" >Go to the Shop
+							<i class="fa fa-shopping-bag"></i></a>';
+							}?>
 
 	</div><!-- .wrapper-navbar end -->

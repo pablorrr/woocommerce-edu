@@ -2,9 +2,9 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the #content div and all content after
+ * Contains the closing of the #content div and allr
  *
- * @package understrap
+ * @package un
  */
 
 $the_theme = wp_get_theme();
