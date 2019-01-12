@@ -1,0 +1,6 @@
+motyw opierany na understrap master
+
+woocomerce wystepuje  w 3 miejscach 
+1 folder woocomrce -szablony woocmorece z wtyczki napisujace page
+2 plik woocommerce-  ogolny szabnlon woocomerce na pisujace te page  ktorych nie w folderrze woococmeerece
+3 inc/woocommerce.php - supporting dla woocommerce np ustawienia dla for,mularzy (np kraj kod pocztowy), galeria lightbox , zoom itd
