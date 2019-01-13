@@ -55,7 +55,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 		</div><!-- #primary -->
 
 		<!-- Do the right sidebar check -->
-		<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
+		<?php// get_template_part( 'global-templates/right-sidebar-check' ); ?>
 
 	</div><!-- .row -->
 

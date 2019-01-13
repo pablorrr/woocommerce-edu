@@ -128,3 +128,15 @@ function crunchify_disable_woocommerce_loading_css_js() {
 		}
 	}	
 }
+// ---------------------------------------------
+// Customizing WooCommerce hooks and filters    -
+// source: https://www.youtube.com/watch?v=jV_-4qHaxyA&list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro&index=7
+// ---------------------------------------------
+
+
+//remove info about count of displaying products in shop page(archive products)
+//remove_action('woocommerce_before_shop_loop','woocommerce_result_count',20);
+
+//remove search filter on right site on a shop page(archive products page)
+//remove_action('woocommerce_before_shop_loop','woocommerce_catalog_ordering',30);
+
