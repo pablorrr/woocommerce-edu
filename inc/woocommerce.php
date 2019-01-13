@@ -146,12 +146,14 @@ function crunchify_disable_woocommerce_loading_css_js() {
 /**
  * Change number of products per row to 3
  * source : https://docs.woocommerce.com/document/change-number-of-products-per-row/
+ * Notice that number of products per row cant be greather than products number per page!!!!!! fix that!!!
  */
  
-add_filter('loop_shop_columns', 'loop_columns');
+add_filter('loop_shop_columns', 'loop_columns',20, 1);
 if (!function_exists('loop_columns')) {
-	function loop_columns() {
-		return 3; // 3 products per row
+	function loop_columns($prod_per_row) {
+		$prod_per_row = get_option('prdt_count_per_row');
+		return $prod_per_row ? $prod_per_row : 3 ;
 	}
 }
 
@@ -161,11 +163,11 @@ if (!function_exists('loop_columns')) {
  * source : https://docs.woocommerce.com/document/storefront-filters-example-change-number-products-displayed-per-page/
  */
  
-add_filter('loop_shop_per_page','products_count_per_page' ,20,1);
+add_filter('loop_shop_per_page','products_count_per_page' ,30,1);
 if (!function_exists('products_count_per_page')) {
-	function products_count_per_page ($prod){
-	
-	return 4;
+	function products_count_per_page ($prod_per_page){
+	$prod_per_page = get_option('prdt_count_per_page');
+	return $prod_per_page ? $prod_per_page : 4 ;
   }
 }
 
@@ -189,6 +191,7 @@ function products_display_setup( $sections ) {
 
 /**
  * Add settings to the specific section we created before
+ * To retrive option val use:get_option( 'id_name_of_field' )
  */
 add_filter( 'woocommerce_get_settings_products', 'wcslider_all_settings', 10, 2 );
 function wcslider_all_settings( $settings, $current_section ) {
@@ -224,6 +227,7 @@ function wcslider_all_settings( $settings, $current_section ) {
 		);
 
 $settings_display_products[] = array( 'type' => 'sectionend', 'id' => 'wcproddissetup' );
+
 		return $settings_display_products;
 	
 	/**
