@@ -128,6 +128,8 @@ function crunchify_disable_woocommerce_loading_css_js() {
 		}
 	}	
 }
+
+
 // ---------------------------------------------
 // Customizing WooCommerce hooks and filters    -
 // source: https://www.youtube.com/watch?v=jV_-4qHaxyA&list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro&index=7
@@ -139,4 +141,36 @@ function crunchify_disable_woocommerce_loading_css_js() {
 
 //remove search filter on right site on a shop page(archive products page)
 //remove_action('woocommerce_before_shop_loop','woocommerce_catalog_ordering',30);
+
+
+/**
+ * Change number of products per row to 3
+ * source : https://docs.woocommerce.com/document/change-number-of-products-per-row/
+ */
+ 
+add_filter('loop_shop_columns', 'loop_columns');
+if (!function_exists('loop_columns')) {
+	function loop_columns() {
+		return 3; // 3 products per row
+	}
+}
+
+
+/**
+ * Change number of products per page (pagination)
+ * source : https://docs.woocommerce.com/document/storefront-filters-example-change-number-products-displayed-per-page/
+ */
+ 
+add_filter('loop_shop_per_page','products_count_per_page' ,20,1);
+if (!function_exists('products_count_per_page')) {
+	function products_count_per_page ($prod){
+	
+	return 4;
+  }
+}
+
+
+
+
+
 
