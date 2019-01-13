@@ -174,6 +174,7 @@ if (!function_exists('products_count_per_page')) {
  * localhost url:http://localhost/wp49/woocommercetest/wp-admin/admin.php?page=wc-settings&tab=products&section=wcslider
  * woocommerce docs source online :https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
  **/
+ 
 add_filter( 'woocommerce_get_sections_products', 'wcslider_add_section' );
 function wcslider_add_section( $sections ) {
 	
@@ -233,7 +234,20 @@ function wcslider_all_settings( $settings, $current_section ) {
 	}
 }
 
+/**
+ * Create the section beneath the products tab ( back end) SAME LIKE HINDI TUTORIAL
+ * YT SOURCE:https://www.youtube.com/watch?v=nvDtTlaN45o&list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro&index=9
+ * localhost url:http://localhost/wp49/woocommercetest/wp-admin/admin.php?page=wc-settings&tab=products&section=wcproddissetup
+ * woocommerce docs source online :https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
+ **/
 
+add_filter( 'woocommerce_get_sections_products', 'products_display_setup' );
+function products_display_setup( $sections ) {
+	
+	$sections['wcproddissetup'] = __( 'Products display setup', 'text-domain' );
+	return $sections;
+	
+}
 
 
 
