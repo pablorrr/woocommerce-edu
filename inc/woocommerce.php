@@ -241,15 +241,26 @@ $settings_display_products[] = array( 'type' => 'sectionend', 'id' => 'wcproddis
  * Display category image on category archive
  * source :https://docs.woocommerce.com/document/woocommerce-display-category-image-on-category-archive/ 
  */
+remove_action('woocommerce_archive_description','woocommerce_taxonomy_archive_description',10);
+remove_action('woocommerce_archive_description','woocommerce_product_archive_description',10);
 add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 2 );
 function woocommerce_category_image() {
     if ( is_product_category() ){
 	    global $wp_query;
+		/////////////taken from wc-template-function (woocommerce plugin) line no 818
+		if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
+			$term = get_queried_object();
+
+			if ( $term && ! empty( $term->description ) ) {
+				echo '<div class="term-description">' . wc_format_content( $term->description ) . '</div>'; // WPCS: XSS ok.
+			}
+		}
+		/////////
 	    $cat = $wp_query->get_queried_object();
 	    $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
 	    $image = wp_get_attachment_url( $thumbnail_id );
 	    if ( $image ) {
-		    echo '<img src="' . $image . '" alt="' . $cat->name . '" />';
+		    echo '<div class="cat_details">   <img src="' . $image . '" alt="' . $cat->name . '" /></div>';
 		}
 	}
 }
