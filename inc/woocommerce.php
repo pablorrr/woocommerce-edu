@@ -264,3 +264,34 @@ function woocommerce_category_image() {
 		}
 	}
 }
+/**
+ * Change default looking of shop page inspired by  hindi tuts :https://youtu.be/Lidkp3l3Awo?list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro&t=770
+ * 
+ */
+// this hook has been taken from woo pluginn woocommerce/template-tags/content-product.php 
+//add_action( 'woocommerce_before_shop_loop_item_title','custom_change_start',15 );
+//add_action( 'woocommerce_after_shop_loop_item','custom_change_end',15 );
+/*function custom_change_start (){
+	
+	echo '<p>TEST function(possibility to put add html,css content)';
+	
+}
+
+function custom_change_end (){
+	
+	echo '</p>';
+	
+}
+*/
+add_action( 'woocommerce_before_shop_loop_item_title','shop_page_excerpt',15 );
+/**
+ * display excerpt on shop products
+ *inpired by hindi : https://youtu.be/Lidkp3l3Awo?list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro&t=1033
+ * 
+ */
+function shop_page_excerpt(){
+	
+	$text = get_the_excerpt();
+	$text = substr ($text , 0, 65);
+	echo '<p>'.$text.'</p>';
+	}
