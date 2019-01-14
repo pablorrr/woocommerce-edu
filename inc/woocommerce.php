@@ -295,3 +295,39 @@ function shop_page_excerpt(){
 	$text = substr ($text , 0, 65);
 	echo '<p>'.$text.'</p>';
 	}
+
+/**
+ * modify default single product page display below a product
+ *inpired by hindi :https://www.youtube.com/watch?v=3aNY0OiNPZQ&index=13&list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro
+ * 
+ */	
+//it cause vannish dispalying text with description below product	
+//remove_action('woocommerce_after_single_product_summary','woocommerce_output_product_data_tabs',10);
+
+if (!function_exists('_custom_tabs_display')){
+	
+		add_filter( 'woocommerce_product_tabs', '_custom_tabs_display',10 ,1);
+		
+		function _custom_tabs_display($tabs){
+			unset ($tabs['reviews']);//removing opinion tabs
+			$tabs['my_custom_tabs'] = array (
+			
+					'title' => 'Custom test title',//add tab title
+					'priority' => 10,
+					'callback' => '_custom_tab_display',//callback to display what is inside tab
+					
+			);
+			
+			return $tabs;
+		}
+
+		function _custom_tab_display(){
+			
+			echo '<iframe width="768" height="480" src="https://www.youtube.com/embed/3aNY0OiNPZQ?list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+
+		}
+
+
+
+}
+
