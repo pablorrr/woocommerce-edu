@@ -216,7 +216,7 @@ function wcslider_all_settings( $settings, $current_section ) {
 			'css'      => 'min-width:300px;',
 			'desc'     => __( 'Number of products per row', 'text-domain' ),
 		);
-		
+		// Add text field option - Display products number per page
 		$settings_display_products[] = array(
 			'name'     => __( 'Display products number per page', 'text-domain' ),
 			'desc_tip' => __( 'Type number of products to display per page ', 'text-domain' ),
@@ -225,6 +225,15 @@ function wcslider_all_settings( $settings, $current_section ) {
 			'css'      => 'min-width:300px;',
 			'desc'     => __( 'Number of products per page', 'text-domain' ),
 		);
+		
+		// Add text field option - Switch on/off display related products
+		$settings_display_products[] = array(
+			'name'     => __( 'Switch on/off display related products', 'text-domain' ),
+			'desc_tip' => __( 'Check to displaY OFF, uncheck to to display ON', 'text-domain' ),
+			'id'       => 'rel_prod',
+			'type'     => 'checkbox',
+		);
+		
 
 $settings_display_products[] = array( 'type' => 'sectionend', 'id' => 'wcproddissetup' );
 
@@ -326,8 +335,44 @@ if (!function_exists('_custom_tabs_display')){
 			echo '<iframe width="768" height="480" src="https://www.youtube.com/embed/3aNY0OiNPZQ?list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 
 		}
-
-
-
 }
+/**
+ * dealing with Related product section in single product page below main content
+ *inpired by hindi :https://www.youtube.com/watch?v=-KtbgAcAQ4E&index=14&list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro
+ * 
+ */	
+
+ //below code line cause disapear realted products (single product page)
+//remove_action( 'woocommerce_after_single_product_summary','woocommerce_output_related_products', 20);
+
+//customize how many products should be displayed in related products section
+add_filter('woocommerce_output_related_products_args','_custom_related_products');
+
+function _custom_related_products($args){
+	
+	$args = array(
+            'posts_per_page' => 2,
+            'columns'        => 2,
+            'orderby'        => 'rand', // @codingStandardsIgnoreLine.
+        );
+	}
+	
+	
+//////////////////
+
+
+add_action('woocommerce_after_single_product_summary','_custom_function_rel_prod', 15);
+
+function _custom_function_rel_prod ( ){
+	
+	$check_val = get_option('rel_prod', false);
+	
+	if (isset($check_val) && $check_val == 'yes'){
+		
+		remove_action('woocommerce_after_single_product_summary','woocommerce_output_related_products' , 20);
+	}
+}
+
+
+
 
