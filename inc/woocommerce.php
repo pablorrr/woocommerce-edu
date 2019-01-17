@@ -4,6 +4,7 @@
  *
  * @package understrap
  */
+ 
 add_action( 'after_setup_theme', 'understrap_woocommerce_support' );
 if ( ! function_exists( 'understrap_woocommerce_support' ) ) {
 	/**
@@ -99,6 +100,11 @@ function understrap_wc_form_field_args( $args, $key, $value = null ) {
 	return $args;
 }
 
+/*removing sidebar from woo pages taken from:https://stackoverflow.com/questions/25700650/how-do-i-remove-woocommerce-sidebar-from-cart-checkout-and-single-product-pages*/
+if(is_cart){
+	
+remove_action( 'woocommerce_sidebar',  'woocommerce_get_sidebar', 50 ); 
+}
 // ---------------------------------------------
 // remove WooCommerce css style when is unnecessary     -
 // source: https://crunchify.com/how-to-stop-loading-woocommerce-js-javascript-and-css-files-on-all-wordpress-postspages/
@@ -381,6 +387,17 @@ function _wc_default_image(){
     return get_template_directory_uri().'/img/no.imagez.png';
     
 }
+//remove sidebar from cart page
 
-
-
+function hook_javascript() {
+	if (is_cart()){//use phhp html bufer obget clean
+    ?>
+        <style>
+          #right-sidebar,#footerfull,#left-sidebar,#statichero ,#hero{display:none;}
+		  
+        </style>
+    <?php }
+}
+add_action('wp_head', 'hook_javascript');
+       
+   
