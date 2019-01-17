@@ -373,6 +373,14 @@ function _custom_function_rel_prod ( ){
 	}
 }
 
+//change default image when no thumbanil in single product image
+
+remove_filter( 'woocommerce_placeholder_img_src', WC()->plugin_url() . '/assets/images/placeholder.png' );
+add_filter('woocommerce_placeholder_img_src',  '_wc_default_image' );
+function _wc_default_image(){
+    return get_template_directory_uri().'/img/no.imagez.png';
+    
+}
 
 
 
