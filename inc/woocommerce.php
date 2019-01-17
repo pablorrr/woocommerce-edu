@@ -389,7 +389,7 @@ function _wc_default_image(){
 }
 //remove sidebar from cart page
 
-function hook_javascript() {
+function _remove_sidebar_cart() {
 	if (is_cart()){//use phhp html bufer obget clean
     ?>
         <style>
@@ -398,6 +398,45 @@ function hook_javascript() {
         </style>
     <?php }
 }
-add_action('wp_head', 'hook_javascript');
+add_action('wp_head', '_remove_sidebar_cart');
+
+//customize cart(page) fee- DOESNT WORK
+
+/*add_action('woocommerce_cart_calculate_fees','_customize_fee_cart');
+function _customize_fee_cart(){
+	
+	global $woocommerce;
+	if(is_admin() && !defined('WP_DOING_AJAX'))
+		return;
+	
+	$price =2;
+	$fee_countries =  array('US','PL','DE');
+	$customer_country = $woocommerce -> customer -> get_shipping_country();
+	
+	if(in_array($customer_country,$fee_countries)){
+		
+		$woocommerce ->cart -> add_fee(_e('additional fee','theme-slug'),$price, true);
+	}
+	
+}
+
+add_action('woocommerce_cart_calculate_fees','_customize_fee_cart_based');
+function _customize_fee_cart_based(){
+	
+	global $woocommerce;
+	if(is_admin() && !defined('WP_DOING_AJAX'))
+		return;
+	
+	$price =2.5;
+	$fee_countries =  array('US','PL','DE');
+	$customer_country = $woocommerce -> customer -> get_shipping_country();
+	if(in_array($fee_countries,$customer_country)){
+		
+		$woocommerce ->cart -> add_fee(_e('additional fee','theme-slug'),$price, true);
+	}
+	
+	
+	
+}*/
        
    
