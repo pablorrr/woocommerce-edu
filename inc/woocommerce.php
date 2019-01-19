@@ -405,7 +405,7 @@ function _wc_default_image(){
 //remove sidebar from cart page
 
 function _remove_sidebar_cart() {
-	if (is_cart()){//use phhp html bufer obget clean
+	if (is_cart() || is_account_page() || is_checkout()){//use phhp html bufer obget clean
     ?>
         <style>
           #right-sidebar,#footerfull,#left-sidebar,#statichero ,#hero{display:none;}

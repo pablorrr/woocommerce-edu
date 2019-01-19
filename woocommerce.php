@@ -16,7 +16,6 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 
 ?>
-
 <div class="wrapper" id="woocommerce-wrapper">
 <?php if ( is_user_logged_in() ) { ?>
  	<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" title="<?php _e('My Account','woothemes'); ?>"><?php _e('My Account','woothemes'); ?></a>
