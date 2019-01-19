@@ -5,6 +5,21 @@
  * @package understrap
  */
  
+ /**
+ * 
+ * Add custom CSS
+ *  Taken from: https://docs.woocommerce.com/document/disable-the-default-stylesheet/
+ * Enqueue your own stylesheet
+ */
+function wp_enqueue_woocommerce_style(){
+	wp_register_style( 'css-woocommerce', get_template_directory_uri() . '/css/woocommerce.css' );
+	
+	if ( class_exists( 'woocommerce' ) ) {
+		wp_enqueue_style( 'css-woocommerce' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'wp_enqueue_woocommerce_style' );
+ 
 add_action( 'after_setup_theme', 'understrap_woocommerce_support' );
 if ( ! function_exists( 'understrap_woocommerce_support' ) ) {
 	/**
