@@ -488,3 +488,26 @@ function wc_minimum_order_amount() {
         }
     }
 }
+/**
+ * Adjust the quantity input values, set up max and min quantity value which customer can order on single product page
+ * taken from https://docs.woocommerce.com/document/adjust-the-quantity-input-values/
+ */
+add_filter( 'woocommerce_quantity_input_args', 'jk_woocommerce_quantity_input_args', 10, 2 ); // Simple products
+
+function jk_woocommerce_quantity_input_args( $args, $product ) {
+	if ( is_singular( 'product' ) ) {
+		$args['input_value'] 	= 4;	// Starting value (we only want to affect product pages, not cart)
+	}
+	$args['max_value'] 	= 50; 	// Maximum value
+	$args['min_value'] 	= 4;   	// Minimum value
+	$args['step'] 		= 2;    // Quantity steps
+	return $args;
+}
+
+add_filter( 'woocommerce_available_variation', 'jk_woocommerce_available_variation' ); // Variations
+
+function jk_woocommerce_available_variation( $args ) {
+	$args['max_qty'] = 50; 		// Maximum value (variations)
+	$args['min_qty'] = 4;   	// Minimum value (variations)
+	return $args;
+}
