@@ -230,6 +230,15 @@ function wcslider_all_settings( $settings, $current_section ) {
 		'id' => 'wcproddissetup' );
 		// Add text field option - Display products number per row
 		$settings_display_products[] = array(
+			'name'     => __( 'Change default title on Shop Page', 'text-domain' ),
+			'desc_tip' => __( 'Type your own title of Shop Page ', 'text-domain' ),
+			'id'       => 'custom_shop_title',
+			'type'     => 'text',
+			'css'      => 'min-width:300px;',
+			'desc'     => __( 'Your Shop Page title', 'text-domain' ),
+		);
+		// Add text field option - Display products number per row
+		$settings_display_products[] = array(
 			'name'     => __( 'Display products number per row', 'text-domain' ),
 			'desc_tip' => __( 'Type number of products to display per row ', 'text-domain' ),
 			'id'       => 'prdt_count_per_row',
@@ -378,10 +387,6 @@ function _custom_related_products($args){
         );
 	}
 	
-	
-//////////////////
-
-
 add_action('woocommerce_after_single_product_summary','_custom_function_rel_prod', 15);
 
 function _custom_function_rel_prod ( ){
@@ -511,3 +516,14 @@ function jk_woocommerce_available_variation( $args ) {
 	$args['min_qty'] = 4;   	// Minimum value (variations)
 	return $args;
 }
+
+/**
+ * Change default title "shop" at archive , main shop title page
+ * taken from https://www.terrytsang.com/tutorial/how-to-change-woocommerce-shop-page-title/
+ * additional task TODO : modify that to get option from custom options which must be additionally  *created
+ */
+add_filter( 'woocommerce_page_title', 'custom_woocommerce_page_title');
+function custom_woocommerce_page_title( $page_title ) {
+				$page_title = esc_html(get_option('custom_shop_title'));
+    return $page_title ? $page_title :esc_html( 'Shop');
+  }
