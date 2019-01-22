@@ -527,3 +527,27 @@ function custom_woocommerce_page_title( $page_title ) {
 				$page_title = esc_html(get_option('custom_shop_title'));
     return $page_title ? $page_title :esc_html( 'Shop');
   }
+		
+		
+		/*
+		 * Display on cart page link to shop page at the bottom
+		 * 
+		 * 
+		 */
+
+		
+		add_action('woocommerce_after_cart', 'add_link_shop');
+		
+		function add_link_shop(){
+			
+				if (!is_cart()){
+								echo '<a style="font-size:1.7em;" 
+									href="'.esc_url(wc_get_cart_url()).'" >Go to Cart page
+								<i class="fa fa-shopping-cart"></i></a>';}
+						if (!is_shop()){
+								echo'<a style="font-size:1.7em;"  
+								href="'.esc_url(get_permalink(wc_get_page_id( 'shop' ) )).'" >Go to Shop page
+								<i class="fa fa-shopping-bag"></i></a>';
+								}
+			
+		}

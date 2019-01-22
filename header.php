@@ -62,9 +62,12 @@ $container = get_theme_mod( 'understrap_container_type' );
 				</button>
 
 				<!-- The WordPress Menu goes here -->
-				<?php wp_nav_menu(
+				<?php
+		 $theme_loc  = is_cart() ? 'shop-menu' : 'primary'; 
+				
+				wp_nav_menu(
 					array(
-						'theme_location'  => 'primary',
+						'theme_location'  => $theme_loc,
 						'container_class' => 'collapse navbar-collapse',
 						'container_id'    => 'navbarNavDropdown',
 						'menu_class'      => 'navbar-nav',
@@ -72,20 +75,14 @@ $container = get_theme_mod( 'understrap_container_type' );
 						'menu_id'         => 'main-menu',
 						'walker'          => new understrap_WP_Bootstrap_Navwalker(),
 					)
-				); ?>
+				);
+			
+				?>
 			<?php if ( 'container' == $container ) : ?>
 			</div><!-- .container -->
 			<?php endif; ?>
-
+	
 		</nav><!-- .site-navigation -->
-		<?php if ( class_exists( 'woocommerce' ) ) {
-						//https://www.skyverge.com/blog/get-woocommerce-page-urls/
-						echo '<a style="font-size:1.7em;" class="btn btn-secondary btn-lg" 
-							href="'.esc_url(wc_get_cart_url()).'" >
-							Go to your Cart<i class="fa fa-shopping-cart"></i></a>
-							<a style="font-size:1.7em;" class="btn btn-secondary btn-lg" 
-							href="'.esc_url(get_permalink(wc_get_page_id( 'shop' ) )).'" >Go to the Shop
-							<i class="fa fa-shopping-bag"></i></a>';
-							}?>
+	
 
 	</div><!-- .wrapper-navbar end -->
