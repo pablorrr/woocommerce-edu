@@ -541,13 +541,55 @@ function custom_woocommerce_page_title( $page_title ) {
 		function add_link_shop(){
 			
 				if (!is_cart()){
-								echo '<a style="font-size:1.7em;" 
+								echo '<a style="font-size:1.2em;" 
 									href="'.esc_url(wc_get_cart_url()).'" >Go to Cart page
 								<i class="fa fa-shopping-cart"></i></a>';}
 						if (!is_shop()){
-								echo'<a style="font-size:1.7em;"  
+								echo'<a style="font-size:1.2em;"  
 								href="'.esc_url(get_permalink(wc_get_page_id( 'shop' ) )).'" >Go to Shop page
 								<i class="fa fa-shopping-bag"></i></a>';
 								}
 			
 		}
+		
+		/*
+		 * Display category on archive/shop page
+		 * 
+		 * 
+		 * taken from: https://code.tutsplus.com/tutorials/display-woocommerce-categories-subcategories-and-products-in-separate-lists--cms-25479
+		 * 
+		 */
+		
+		add_action( 'woocommerce_before_shop_loop', '_product_subcategories', 50 );
+		
+		function _product_subcategories( $args = array() ) {
+			
+												$parentid = get_queried_object_id();//Retrieve ID of the current queried object.
+
+												$args = array('parent' => $parentid		);
+												$terms = get_terms( 'product_cat', $args );
+
+								if ( $terms ) {
+									//echo '<pre>';
+										//	var_export($terms);
+										//	echo '</pre>';
+												echo '<ul class="product-cats">';
+												foreach ( $terms as $term ) {
+													
+
+																				echo '<li class="category">';                 
+																				woocommerce_subcategory_thumbnail( $term );//Show subcategory thumbnails.
+																				echo '<h2>';
+																				echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+																				echo $term->name;
+																				echo '</a>';
+																				echo '</h2>';
+
+																				echo '</li>';
+	}
+															echo '</ul>';
+
+										}
+}
+
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20); 
