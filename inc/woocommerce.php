@@ -116,11 +116,7 @@ function understrap_wc_form_field_args( $args, $key, $value = null ) {
 	return $args;
 }
 
-/*removing sidebar from woo pages taken from:https://stackoverflow.com/questions/25700650/how-do-i-remove-woocommerce-sidebar-from-cart-checkout-and-single-product-pages*/
-if(is_cart){
-	
-remove_action( 'woocommerce_sidebar',  'woocommerce_get_sidebar', 50 ); 
-}
+
 // ---------------------------------------------
 // remove WooCommerce css style when is unnecessary     -
 // source: https://crunchify.com/how-to-stop-loading-woocommerce-js-javascript-and-css-files-on-all-wordpress-postspages/
@@ -576,6 +572,15 @@ function custom_woocommerce_page_title( $page_title ) {
 										//	echo '</pre>';
 												echo  '<div class="col-md-12 woo-cat-margin">';
 												echo '<h2 class ="woo-cat-title">'.sprintf(esc_html__('%s','text-domain'),'Product categories' ).'</h2>';
+												echo '<style>
+							ul.product-cats > li.category:hover > a > img:hover {
+								-moz-transform: scale(1.2) rotate(360deg);
+								-webkit-transform: scale(1.2) rotate(360deg);
+								-o-transform: scale(1.2) rotate(360deg);
+								-ms-transform: scale(1.2) rotate(360deg);
+								transform: scale(1.2) rotate(340deg);
+								}						
+							</style>';
 												echo'<ul class="product-cats">';
 												foreach ( $terms as $term ) {
 													
