@@ -411,11 +411,7 @@ function _remove_sidebar_cart() {
     ?>
         <style>
           #right-sidebar,#footerfull,#left-sidebar,#statichero ,#hero{display:none;}
-		   ul.products {
-				margin: 3em;
-				padding: 0;
-				list-style: none outside;
-				clear: both;}
+		  #content > div > ul { margin-top: 3em;!important}
         </style>
     <?php }
 }
