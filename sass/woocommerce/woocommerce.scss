@@ -1,0 +1,154 @@
+ul.product-cats li {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 4.236em;
+    text-align: center;
+    position: relative;
+
+   img {
+    margin: 0 auto; 
+ }
+} 
+@media screen and (min-width:768px) {
+ 
+    ul.product-cats {
+        margin-left: 0;
+        clear: both;
+    
+    li {
+        width: 29.4117647059%;
+        float: left;
+        margin-right: 5.8823529412%;
+    }
+    li:nth-of-type(3) {
+        margin-right: 0;
+    }
+ }    
+}
+
+
+.woocommerce-products-header__title page-title{
+	
+	text-align: center;
+}
+
+.woocommerce-ordering{
+	
+	position:absolute;
+	right:150px;
+}
+
+.woo-cat-margin{
+margin-top:25px;
+}
+
+.woo-cat-title{
+text-align:center;
+	margin:25px;
+}
+.woocommerce-breadcrumb-custom {
+    
+    margin: auto;
+    padding: 0;
+    font-size: .92em;
+    color: #777;
+}
+
+.custom-product-title{
+
+margin-bottom: 125px;
+
+}
+ 
+//ul.product-cats > li.category:hover > a >
+
+//#content > div > div.col-md-12.woo-cat-margin > ul > li:nth-child(1) > a >img
+ul.product-cats > li.category:hover > a >:hover {
+-moz-transform: scale(1.2) rotate(360deg);
+-webkit-transform: scale(1.2) rotate(360deg);
+-o-transform: scale(1.2) rotate(360deg);
+-ms-transform: scale(1.2) rotate(360deg);
+transform: scale(1.2) rotate(340deg);
+}
+
+/*
+* taken from culinary theme
+*/
+
+/* =Woocomerce
+----------------------------------------------- */
+body.woocommerce-page aside#secondary {
+  display: none; }
+
+#woocommerce-wrapper {
+  margin-top: 200px;
+  margin-bottom: 100px;
+  padding: 55px; }
+
+#main > ul > li.product-type-simple > div > a {
+  color: #343a40; }
+
+/*cart page*/
+.woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals {
+  width: 100%;
+  margin-top: 25%; }
+
+/*update cart button*/
+.btn.btn-outline-primary.updt {
+  margin-top: 10%; }
+
+#content table.cart td.actions .coupon,
+.woocommerce table.cart td.actions .coupon,
+.woocommerce-page #content table.cart td.actions .coupon,
+.woocommerce-page table.cart td.actions .coupon {
+  width: 100%;
+  margin-top: 20%; }
+
+.btn.btn-outline-primary,
+#review_form #respond .form-submit input,
+.add-to-cart-container {
+  color: white;
+  border-style: outset;
+  border-radius: 5%;
+  background-color: #ff944d;
+  text-align: center; }
+
+.added_to_cart.wc-forward {
+  color: white;
+  text-align: center; }
+
+.added_to_cart.wc-forward:hover {
+  background-color: #ffc299; }
+
+.add-to-cart-container > a:hover {
+  background-color: #ffc299; }
+
+#review_form #respond .form-submit input:hover {
+  background-color: #ffc299; }
+
+.btn.btn-outline-primary:hover {
+  background-color: #ffc299; }
+
+div.cart-collaterals a.btn.btn-primary.btn-lg.btn-block {
+  background-color: #7efe36b3; }
+  div.cart-collaterals a.btn.btn-primary.btn-lg.btn-block:hover {
+    background-color: #ffc299; }
+
+.woocommerce .quantity .qty {
+  display: none; }
+
+/*  shop page*/
+/* .site-search filter */
+#main > div.site-search {
+  margin-bottom: 5em; }
+
+/*sorting ordering*/
+#main > form.woocommerce-ordering {
+  margin: 0 0 5em; }
+
+/* =Woocomerce media-queries
+----------------------------------------------- */
+@media (min-width: 0px) and (max-width: 768px) {
+  #main > ul > li.product.status-publish,
+  section.related.products ul > li.status-publish {
+    width: 100%; } }
