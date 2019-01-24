@@ -5,7 +5,8 @@
  * @package understrap
  */
  
- /**
+ 
+/**
  * 
  * Add custom CSS
  *  Taken from: https://docs.woocommerce.com/document/disable-the-default-stylesheet/
@@ -14,7 +15,7 @@
 function wp_enqueue_woocommerce_style(){
 	wp_register_style( 'css-woocommerce', get_template_directory_uri() . '/css/woocommerce.css' );
 	
-	if ( class_exists( 'woocommerce' ) ) {
+	if ( class_exists( 'woocommerce' ) &&( is_woocommerce()) ) {
 		wp_enqueue_style( 'css-woocommerce' );
 	}
 }
@@ -573,23 +574,47 @@ function custom_woocommerce_page_title( $page_title ) {
 									//echo '<pre>';
 										//	var_export($terms);
 										//	echo '</pre>';
-												echo '<ul class="product-cats">';
+												echo  '<div class="col-md-12 woo-cat-margin">';
+												echo '<h2 class ="woo-cat-title">'.sprintf(esc_html__('%s','text-domain'),'Product categories' ).'</h2>';
+												echo'<ul class="product-cats">';
 												foreach ( $terms as $term ) {
 													
 
 																				echo '<li class="category">';                 
 																				woocommerce_subcategory_thumbnail( $term );//Show subcategory thumbnails.
-																				echo '<h2>';
+																				echo '<p>';
 																				echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
 																				echo $term->name;
 																				echo '</a>';
-																				echo '</h2>';
+																				echo '</p>';
 
 																				echo '</li>';
 	}
-															echo '</ul>';
+															echo '</ul></div>';
 
 										}
 }
 
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20); 
+
+
+/*
+ * change breadrumbs nav class 
+ * 
+ */
+
+
+/**
+ * Change several of the breadcrumb defaults
+ */
+add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
+function jk_woocommerce_breadcrumbs() {
+    return array(
+            'delimiter'   => ' &#47; ',
+            'wrap_before' => '<nav style="margin:auto;" class="woocommerce-breadcrumb-custom" itemprop="breadcrumb">',
+            'wrap_after'  => '</nav>',
+            'before'      => '',
+            'after'       => '',
+            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+        );
+}
