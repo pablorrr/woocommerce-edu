@@ -37,6 +37,9 @@ ul.product-cats li {
   font-size: .92em;
   color: #777; }
 
+.custom-product-title {
+  margin-bottom: 125px; }
+
 /*
 * taken from culinary theme
 */

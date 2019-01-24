@@ -580,14 +580,15 @@ function custom_woocommerce_page_title( $page_title ) {
 												foreach ( $terms as $term ) {
 													
 
-																				echo '<li class="category">';                 
+																				echo '<li class="category">';  
+																				echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';               
 																				woocommerce_subcategory_thumbnail( $term );//Show subcategory thumbnails.
 																				echo '<p>';
-																				echo '<a href="' .  esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+																			
 																				echo $term->name;
-																				echo '</a>';
+																			
 																				echo '</p>';
-
+																			echo '</a>';
 																				echo '</li>';
 	}
 															echo '</ul></div>';
@@ -605,7 +606,7 @@ remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 
 
 /**
- * Change several of the breadcrumb defaults
+ * Change several of the breadcrumb defaults taken from woo docs
  */
 add_filter( 'woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs' );
 function jk_woocommerce_breadcrumbs() {
@@ -618,3 +619,25 @@ function jk_woocommerce_breadcrumbs() {
             'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
         );
 }
+
+
+/*
+ * Display shop link in product page with icon
+ * 
+ */
+add_action( 'woocommerce_after_single_product', 'display_shop_page_link', 5 );
+ 
+function display_shop_page_link() {
+echo'<a style="font-size:1.2em;"  
+								href="'.esc_url(get_permalink(wc_get_page_id( 'shop' ) )).'" >Go to Shop page
+								<i class="fa fa-shopping-bag"></i></a>';
+}
+
+/*
+ * Print title on single product page at  top
+ * 
+ */
+
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+add_action( 'woocommerce_before_single_product', 'woocommerce_template_single_title', 15 );
+ 
