@@ -106,9 +106,8 @@ body.woocommerce-page aside#secondary {
 
 div.cart-collaterals a.btn.btn-primary.btn-lg.btn-block {
   background-color: #7efe36b3; }
-
-div.cart-collaterals a.btn.btn-primary.btn-lg.btn-block:hover {
-  background-color: #ffc299; }
+  div.cart-collaterals a.btn.btn-primary.btn-lg.btn-block:hover {
+    background-color: #ffc299; }
 
 .woocommerce .quantity .qty {
   display: none; }
